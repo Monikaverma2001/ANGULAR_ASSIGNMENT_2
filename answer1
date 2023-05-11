@@ -9,3 +9,114 @@ Good Design: Good navigation make website look more attractive, effective and go
 ![Image]{/q1_1.png}
 
 ![Image]{/q1_2.png}
+
+ADD NAV BY ANGULAR
+CODE:
+
+
+
+  <script>
+    var app = angular.module("myApp", ["ngRoute"]);
+    app.config(function ($routeProvider) {
+      $routeProvider
+        .when("/addstudent", {
+          template: '<div>\
+            <form action="/student/save" method="POST" enctype="multipart/form-data"class="form-control">\
+                              <h1>ADD STUDENT</h1>\
+\
+                              <input type="number" placeholder="enter university rollnumber" name="urn"class="form-control"><br>\
+                              <input type="text" placeholder="username" name="name" class="form-control"><br>\
+                              <input type="number" placeholder="phonenumber" name="phone" class="form-control"><br>\
+                              <input type="number" placeholder="semster" name="semester" class="form-control" min="1"\
+                                max="8" step="1"><br>\
+                              <input type="text" placeholder="comment" name="comment" class="form-control"><br>\
+                              <div id="i">\
+                                <% if(mentor!=null) { %>\
+\
+                                  <ul>\
+                                    <label for="mentor">Enter mentor</label>\
+\
+                                    <% mentor.forEach(function(item){ %>\
+                                      \
+                                      <li>\
+                                        <input type="radio" id="mentor" name="mentor" value="<%= item.name %>" checked>\
+                                        <label for="mentor">\
+                                          <%= item.name%>\
+                                        </label>\
+\
+                                      </li>\
+                                      <% }) %>\
+                                  </ul>\
+                                  <% } %>\
+                              </div> <button type="submit" class="btn btn-success">add data</button>\
+                            </form>\
+                          </div>'
+        })
+        .when("/updatefac/:id*", {
+          templateUrl:'././views/update.html'
+        })
+       
+        .when("/updatestudent", {
+          template: ' <div>\
+                            <h1>UPDATE STUDENT</h1>\
+                            <form action="/stuedit" method="POST" class="form-control">\
+                              <input type="text" placeholder="urn" name="urn" class="form-control"><br>\
+                              <input type="text" placeholder="username" name="name"class="form-control"><br>\
+                              <input type="number" placeholder="phonenumber" name="phone"class="form-control"><br>\
+                              <input type="number" placeholder="semster" name="semester" id="semester" min="1" max="8"step="1"class="form-control"><br>\
+                              \
+                              <input type="text" placeholder="comment" name="comment" class="form-control"><br>\
+                              <div id="i">\
+                                <% if(mentor!=null) { %>\
+                                  \
+                                  <ul>\
+                                    <label for="mentor">Enter mentor</label>\
+                                    \
+                                    <% mentor.forEach(function(item){ %>\
+                                      <li>\
+                                        <input type="radio" id="mentor" name="mentor" value="<%= item.name %>" checked>\
+                                        <label for="mentor">\
+                                          <%= item.name%>\
+                                        </label>\
+                                        \
+                                      </li>\
+                                      <% }) %>\
+                                  </ul>\
+                                  <% } %>\
+                              </div><br><br>\
+                              \
+                              <button type="submit" class="btn btn-primary">update</button>\
+                            </form>\
+                          </div>'
+        })
+        .when("/addmentor", {template: '<div><p class="text-center h1 fw-bold ">SAVE NEW FACULITY</p>\
+          <form action="/save" method="POST" class= "form-control" enctype="multipart/form-data" ><input type="file" id="image" name="image" value="" required><br><br><input type="text" placeholder="username" name="name" class="form-control" required><br><input type="text" placeholder="password" name="password" class="form-control"required><br>\
+                    <input type="number" placeholder="phone number" name="phone" class="form-control"\
+                      required><br> <div> <input type="radio" id="HOD" name="position" value="true" checked>\
+                            <label for="HOD">HOD</label>\
+                        </div>\
+                        <br>\
+                          <div> <input type="radio" id="Mentor" name="position" value="false">\
+                              <label for="Mnetor">Mentor</label>\
+                          </div>\
+                          <button type="submit" class="btn btn-success">add data</button>\
+                        </form><br><br><br> </div>'
+    });
+});
+  </script>
+  
+  
+  define routes and ng-view where you want to show your dynamic data
+  
+  <div style="text-align: center;">
+              <button class="btn btn-primary"><a href="#/!">Main</a></button>
+              
+              <button class="btn btn-primary"> <a href="#!addstudent">ADD STUDENT</a></button>
+              <button class="btn btn-primary"><a href="#!updatestudent">UPDATE STUDENT</a></button>
+              <button class="btn btn-primary"><a href="#!addmentor">SAVE NEW FACULITY</a></button>
+             
+              <div ng-view></div>
+            </div>
+  
+  
+  
